@@ -1,4 +1,5 @@
-import * as THREE from "../build/three.module.js"
+import * as THREE from "../core/build/three.module.js"
+import { OrbitControls } from "../core/jsm/controls/OrbitControls.js"
 
 class App {
     constructor() {
@@ -78,8 +79,8 @@ class App {
 
     update(time){
         time *= 0.001; // second unitc
-        this._model.rotation.x = time;
-        this._model.rotation.y = time;
+    //this._model.rotation.x = time;
+    //this._model.rotation.y = time;
     }
 }
 
