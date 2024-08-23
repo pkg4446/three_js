@@ -1,4 +1,5 @@
 import * as THREE from "../core/build/three.module.js"
+import { OrbitControls } from "../core/jsm/controls/OrbitControls.js";
 
 class App {
     constructor() {
@@ -16,6 +17,7 @@ class App {
         this._setCamera();
         this._setLight();
         this._setModle();
+        this._setControls();
 
         window.onresize = this.resize.bind(this);
         this.resize();
@@ -52,6 +54,10 @@ class App {
 
         this._scene.add(cube);
         this._cube = cube;
+    }
+///////////////////////////////////////////////////////////
+    _setControls() {
+        new OrbitControls(this._camera, this._divContainer)
     }
 
     resize() {
