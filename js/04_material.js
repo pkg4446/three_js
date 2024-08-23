@@ -34,7 +34,7 @@ class App {
             0.1,
             100
         );
-        camera.position.z = 20;
+        camera.position.z = 10;
         this._camera = camera;
     }
 
@@ -47,39 +47,28 @@ class App {
     }
 
     _setModle() {
-        const solarSystem = new THREE.Object3D();
-        this._scene.add(solarSystem);
+        const vertices = [];
+        for (let index = 0; index < 10000; index++) {
+            const axis_x = THREE.MathUtils.randFloatSpread(5);
+            const axis_y = THREE.MathUtils.randFloatSpread(5);
+            const axis_z = THREE.MathUtils.randFloatSpread(5);
+            vertices.push(new THREE.Vector3(axis_x,axis_y,axis_z));
+        }
 
-        const radius = 1;
-        const widthSegments  = 12;
-        const heightSegments = 12;
-        const sphereGeometry = new THREE.SphereGeometry(radius,widthSegments,heightSegments);
+        const geometry = new THREE.BufferGeometry().setFromPoints(vertices);
         
-        const sunMaterial    = new THREE.MeshPhongMaterial({emissive:0xffff00, flatShading:true});
-        const sunMesh = new THREE.Mesh(sphereGeometry, sunMaterial);
-        sunMesh.scale.set(3, 3, 3);
-        solarSystem.add(sunMesh);
+        const sprite   = new THREE.TextureLoader().load("../core/textures/sprites/disc.png");
 
-        const earthOrbit = new THREE.Object3D();
-        earthOrbit.position.x = 10;
-        solarSystem.add(earthOrbit);
+        const material = new THREE.PointsMaterial({
+            map:   sprite,
+            alphaTest: 0.5,
+            color: 0xff0000,
+            size:  0.1,
+            sizeAttenuation: true
+        });
 
-        const earthMaterial = new THREE.MeshPhongMaterial({color:0x2233ff, emissive:0x112244, flatShading:true});
-        const erathMesh = new THREE.Mesh(sphereGeometry, earthMaterial);
-        earthOrbit.add(erathMesh);
-
-        const moonOrbit = new THREE.Object3D();
-        moonOrbit.position.x = 2;
-        earthOrbit.add(moonOrbit);
-
-        const moonhMaterial = new THREE.MeshPhongMaterial({color:0x888888, emissive:0x222222, flatShading:true});
-        const moonMesh = new THREE.Mesh(sphereGeometry, moonhMaterial);
-        moonMesh.scale.set(0.5, 0.5, 0.5);
-        moonOrbit.add(moonMesh);
-
-        this._solarSystem = solarSystem;
-        this._earthOrbit  = earthOrbit;
-        this._moonOrbit   = moonOrbit;
+        const points = new THREE.Points(geometry, material);
+        this._scene.add(points);
     }
 ///////////////////////////////////////////////////////////
     _setControls() {
@@ -104,10 +93,6 @@ class App {
 
     update(time){
         time *= 0.001; // second unitc
-        
-        this._solarSystem.rotation.y = time/2;
-        this._earthOrbit.rotation.y  = time*2;
-        this._moonOrbit.rotation.y   = -this._earthOrbit.rotation.y;
     }
 }
 
