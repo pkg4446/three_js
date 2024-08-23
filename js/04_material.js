@@ -45,7 +45,7 @@ class App {
         light.position.set(-1,2,4);
         this._scene.add(light);
     }
-
+/*
     _setModle() {
         const vertices = [];
         for (let index = 0; index < 10000; index++) {
@@ -56,9 +56,7 @@ class App {
         }
 
         const geometry = new THREE.BufferGeometry().setFromPoints(vertices);
-        
         const sprite   = new THREE.TextureLoader().load("../core/textures/sprites/disc.png");
-
         const material = new THREE.PointsMaterial({
             map:   sprite,
             alphaTest: 0.5,
@@ -69,6 +67,45 @@ class App {
 
         const points = new THREE.Points(geometry, material);
         this._scene.add(points);
+    }
+*/
+/*
+    _setModle() {
+        const vertices = [
+            new THREE.Vector3(-1,1,0),
+            new THREE.Vector3(1,1,0),
+            new THREE.Vector3(-1,-1,0),
+            new THREE.Vector3(1,-1,0)
+        ];
+
+        const geometry = new THREE.BufferGeometry().setFromPoints(vertices);
+        const material = new THREE.LineBasicMaterial({color:0xffffff});
+
+        //const line = new THREE.Line(geometry, material);
+        //const line = new THREE.LineSegments(geometry, material);
+        const line = new THREE.LineLoop(geometry, material);
+        this._scene.add(line);
+    }
+*/
+    _setModle() {
+        const vertices = [
+            new THREE.Vector3(-1,1,0),
+            new THREE.Vector3(1,1,0),
+            new THREE.Vector3(-1,-1,0),
+            new THREE.Vector3(1,-1,0)
+        ];
+
+        const geometry = new THREE.BufferGeometry().setFromPoints(vertices);
+        const material = new THREE.LineDashedMaterial({
+            color:0xffffff,
+            dashSize: 0.2,
+            gapSize:  0.1,
+            scale:    1
+        });
+        
+        const line = new THREE.LineLoop(geometry, material);
+        line.computeLineDistances();
+        this._scene.add(line);
     }
 ///////////////////////////////////////////////////////////
     _setControls() {
