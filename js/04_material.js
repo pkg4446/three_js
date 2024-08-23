@@ -34,7 +34,7 @@ class App {
             0.1,
             100
         );
-        camera.position.z = 10;
+        camera.position.z = 3;
         this._camera = camera;
     }
 
@@ -87,25 +87,104 @@ class App {
         this._scene.add(line);
     }
 */
+/*
     _setModle() {
-        const vertices = [
-            new THREE.Vector3(-1,1,0),
-            new THREE.Vector3(1,1,0),
-            new THREE.Vector3(-1,-1,0),
-            new THREE.Vector3(1,-1,0)
-        ];
 
-        const geometry = new THREE.BufferGeometry().setFromPoints(vertices);
-        const material = new THREE.LineDashedMaterial({
-            color:0xffffff,
-            dashSize: 0.2,
-            gapSize:  0.1,
-            scale:    1
+        const material = new THREE.MeshBasicMaterial({
+            color:      0xffff00,
+            wireframe:  false,
+
+            visible:    true,
+            transparent:true,
+            opacity:    0.5,
+            depthTest:  true,
+            depthWrite: true,
+            side:       THREE.FrontSide
         });
+
+        const material = new THREE.MeshLambertMaterial({
+            transparent:true,
+            opacity:    0.5,
+            side:       THREE.DoubleSide,
+
+            color:      0xffff00,
+            emissive:   0x555500,
+            wireframe:  false
+        });
+
+        const material = new THREE.MeshPhongMaterial({
+            color:      0xff0000,
+            emissive:   0x555500,
+            specular:   0xffff00,
+            shininess:  1,
+            flatShading:false,
+            wireframe:  false
+        });
+
+        const material = new THREE.MeshStandardMaterial({
+            color:      0xff0000,
+            emissive:   0x555500,
+            roughness:  0.25,
+            metalness:  0.1,
+            wireframe:  false,
+            flatShading:false
+        });
+
+        const material = new THREE.MeshPhysicalMaterial({
+            color:      0xffff00,
+            emissive:   0x555500,
+            roughness:  1,
+            metalness:  0,
+            clearcoat:  0.9,
+            clearcoatRoughness:0.1,
+            wireframe:  false,
+            flatShading:false
+        });
+
+        const box = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), material);
+        box.position.set(-1.5, 0, 0);
+        this._scene.add(box);
         
-        const line = new THREE.LineLoop(geometry, material);
-        line.computeLineDistances();
-        this._scene.add(line);
+        const sphere = new THREE.Mesh(new THREE.SphereGeometry(0.5, 32, 32), material);
+        box.position.set(1.5, 0, 0);
+        this._scene.add(sphere);
+        
+    }
+*/
+    _setModle() {
+        const textureLoader = new THREE.TextureLoader();
+        const map = textureLoader.load(
+            "../core/textures/uv_grid_opengl.jpg",
+            texture => {
+                texture.repeat.x = 2;
+                texture.repeat.y = 2;
+
+                //texture.wrapS = THREE.MirroredRepeatWrapping;
+                //texture.wrapT = THREE.MirroredRepeatWrapping;
+                texture.wrapS = THREE.ClampToEdgeWrapping;
+                texture.wrapT = THREE.ClampToEdgeWrapping;
+
+                texture.offset.x = 0;
+                texture.offset.y = 0;
+                
+                texture.rotation = THREE.MathUtils.degToRad(45);
+                texture.center.x = 0.5;
+                texture.center.y = 0.5;
+            }
+        );
+        
+        const material = new THREE.MeshStandardMaterial({
+            map: map
+        });
+
+        const box = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), material);
+        box.position.set(-1.5, 0, 0);
+        this._scene.add(box);
+        
+        const sphere = new THREE.Mesh(new THREE.SphereGeometry(0.5, 32, 32), material);
+        box.position.set(1.5, 0, 0);
+        this._scene.add(sphere);
+        
     }
 ///////////////////////////////////////////////////////////
     _setControls() {
