@@ -1,5 +1,7 @@
 import * as THREE from "../core/build/three.module.js";
 import { OrbitControls } from "../core/jsm/controls/OrbitControls.js";
+import { FontLoader } from "../core/jsm/loaders/FontLoader.js";
+import { TextGeometry } from "../core/jsm/geometries/TextGeometry.js";
 
 class App {
     constructor() {
@@ -212,6 +214,7 @@ class App {
         this._model = group;
     }
 */
+/*
     _setModle() {
         const shape = new THREE.Shape();
         
@@ -247,6 +250,42 @@ class App {
 
         this._scene.add(group);
         this._model = group;
+    }
+*/
+    _setModle() {
+        const frontLoader = new FontLoader();
+        async function loadFont(that) {
+            const url  = "../core/fonts/helvetiker_regular.typeface.json"
+            const font = await new Promise((resolve, reject) => {
+                frontLoader.load(url, resolve, undefined, reject);
+            });
+
+            const geometry = new TextGeometry("T E S T", {
+                font:   font,
+                size:   5,
+                height: 1,
+                curveSegments: 4,
+                // setting for ExtrudeGeometry
+                bevelEnabled: true,
+                bevelThickness: 0.3,
+                bevelSize: 0.3,
+                bevelSegments: 4
+            });
+
+            const fillMaterial = new THREE.MeshPhongMaterial({color:0xDDDDDD});
+            const cube = new THREE.Mesh(geometry,fillMaterial);
+
+            const lineMaterial = new THREE.LineBasicMaterial({color: 0xffff00});
+            const line = new THREE.LineSegments(new THREE.WireframeGeometry(geometry),lineMaterial);
+
+            const group = new THREE.Group();
+            group.add(cube);
+            group.add(line);
+
+            that._scene.add(group);
+            that._model = group;
+        };
+        loadFont(this);
     }
 ///////////////////////////////////////////////////////////
     _setControls() {
