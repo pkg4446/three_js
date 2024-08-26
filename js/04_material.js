@@ -156,8 +156,8 @@ class App {
         const map = textureLoader.load(
             "../core/textures/uv_grid_opengl.jpg",
             texture => {
-                texture.repeat.x = 2;
-                texture.repeat.y = 2;
+                texture.repeat.x = 1;
+                texture.repeat.y = 1;
 
                 //texture.wrapS = THREE.MirroredRepeatWrapping;
                 //texture.wrapT = THREE.MirroredRepeatWrapping;
@@ -167,9 +167,18 @@ class App {
                 texture.offset.x = 0;
                 texture.offset.y = 0;
                 
-                texture.rotation = THREE.MathUtils.degToRad(45);
-                texture.center.x = 0.5;
-                texture.center.y = 0.5;
+                //texture.rotation = THREE.MathUtils.degToRad(45);
+                //texture.center.x = 0.5;
+                //texture.center.y = 0.5;
+
+                //texture.magFilter = THREE.LinearFilter;
+
+                //texture.minFilter = THREE.NearestFilter;
+                //texture.minFilter = THREE.LinearFilter;
+                //texture.minFilter = THREE.NearestMipMapNearestFilter;
+                //texture.minFilter = THREE.LinearMipMapNearestFilter;
+                //texture.minFilter = THREE.NearestMipMapLinearFilter;
+                //texture.minFilter = THREE.LinearMipMapLinearFilter;
             }
         );
         
