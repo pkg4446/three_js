@@ -26,6 +26,33 @@ class App {
         requestAnimationFrame(this.render.bind(this));
     }
 
+    _zoomFit(object3D, camera){
+        //모델의 경계 박스
+        const box = new THREE.Box3().setFromObject(object3D);
+        //모델의 경계 박스 대각 길이
+        const sizeBox = box.getSize(new THREE.Vector3()).length();
+        //모델의 경계 박스 중심 위치
+        const centerBox = box.getCenter(new THREE.Vector3());
+        //모델의 크기 절반값
+        const halfSizeModel = sizeBox/2;
+        //카메라의 fov의 절반값
+        const halfFov = THREE.MathUtils.degToRad(camera.fov/2);
+        //모델을 화면에 꽉 채우기 위한 적당한 거리
+        const distance = halfSizeModel / Math.tan(halfFov);
+        //모델 중심에서 카메라 위치로 향하는 방향 단위 벡터 계산
+        const direction = (new THREE.Vector3()).subVectors(camera.position, centerBox).normalize();
+        //"단위 방향 벡터" 방향으로 모델 중심 위치에서 거리에 대한 위치
+        const position = direction.multiplyScalar(distance).add(centerBox);
+        camera.position.copy(position);
+        //모델의 크기에 맞춰 카메라의 near, far 값을 대략적으로 조정
+        camera.near = sizeBox/100;
+        camera.far  = sizeBox*100;
+        //카메라 기본 속성 변경에 따른 투영행렬 업데이트
+        camera.updateProjectionMatrix();
+        //카메라가 모델의 중심을 바라보도록 함
+        camera.lookAt(centerBox.x, centerBox.y, centerBox.z);
+    }
+
     _setCamera() {
         const width  = this._divContainer.clientWidth;
         const height = this._divContainer.clientHeight;
@@ -35,7 +62,7 @@ class App {
             0.1,
             100
         );
-        camera.position.z = 4;
+        camera.position.z = 1;
         this._camera = camera;
 
         this._scene.add(this._camera);
@@ -52,12 +79,13 @@ class App {
 
     _setModle() {
         const gltfLoader = new GLTFLoader();
-        const url = "../data/adamHead/adamHead.gltf";
+        const url = "../data/GLTF/adamHead.gltf";
         gltfLoader.load(
             url,
             (gltf) => {
                 const root = gltf.scene;
                 this._scene.add(root);
+                this._zoomFit(root, this._camera);
             }
         );
     }
