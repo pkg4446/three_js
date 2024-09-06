@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta value="viewport" content="width=device-width,initial-scale=1">
+        <link rel="stylesheet" href="../css/common.css">
+        <style>
+            #controls {
+                display: flex;
+                position: absolute;
+                left: 50%;
+                transform: 100%;
+                height: 100%;
+            }
+        </style>
+        <script type="importmap">
+            {
+                "imports": {
+                    "three": "../core/build/three.module.js"
+                }
+            }
+        </script>
+        <script type="module" src="../js/20_animation.js" defer></script>
+        <title>3D Model with Three.js</title>
+    </head>
+    <body>
+        <div id="webgl-container"></div>
+        <div id="controls"></div>
+    </body>
+</html>
