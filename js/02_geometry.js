@@ -263,7 +263,7 @@ class App {
             const geometry = new TextGeometry("T E S T", {
                 font:   font,
                 size:   5,
-                height: 1,
+                depth:  1,
                 curveSegments: 4,
                 // setting for ExtrudeGeometry
                 bevelEnabled: true,
@@ -271,6 +271,7 @@ class App {
                 bevelSize: 0.3,
                 bevelSegments: 4
             });
+            geometry.center();
 
             const fillMaterial = new THREE.MeshPhongMaterial({color:0xDDDDDD});
             const cube = new THREE.Mesh(geometry,fillMaterial);
