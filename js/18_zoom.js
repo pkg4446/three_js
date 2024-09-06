@@ -204,6 +204,7 @@ class App {
     }
 
     update(time){
+        this._controls.update();
         if(this._pick) { 
             time *= 0.001; // second unitc
             this._pick.rotation.y=time;
