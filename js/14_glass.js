@@ -18,7 +18,7 @@ class App {
         this._setCamera();
         this._setLight();
         this._setBackground();
-        this._setModle();
+        this._setModel();
         this._setControls();
 
         window.onresize = this.resize.bind(this);
@@ -57,7 +57,7 @@ class App {
         });
     }
 
-    _setModle() {
+    _setModel() {
         const teapotRenderTarget = new THREE.WebGLCubeRenderTarget(1024, {
                 format: THREE.RGBFormat,
                 generateMipmaps: true,

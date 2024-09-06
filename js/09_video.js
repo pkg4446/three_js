@@ -38,7 +38,7 @@ class App {
                 const videoTexture = new THREE.VideoTexture(video);
                 this._videoTexture = videoTexture;
 
-                this._setModle();
+                this._setModel();
             }).catch(function(error){
                 console.error("카메라에 접근할 수 없습니다.", error);
             });
@@ -68,7 +68,7 @@ class App {
         this._scene.add(light);
     }
 
-    _setModle() {
+    _setModel() {
         const geometry = new THREE.BoxGeometry(1,1,1);
         const material = new THREE.MeshPhongMaterial({
             map: this._videoTexture,

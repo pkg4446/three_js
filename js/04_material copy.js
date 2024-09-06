@@ -17,7 +17,7 @@ class App {
 
         this._setCamera();
         this._setLight();
-        this._setModle();
+        this._setModel();
         this._setControls();
 
         window.onresize = this.resize.bind(this);
@@ -52,7 +52,7 @@ class App {
         this._camera.add(light);
     }
 /*
-    _setModle() {
+    _setModel() {
         const vertices = [];
         for (let index = 0; index < 10000; index++) {
             const axis_x = THREE.MathUtils.randFloatSpread(5);
@@ -76,7 +76,7 @@ class App {
     }
 */
 /*
-    _setModle() {
+    _setModel() {
         const vertices = [
             new THREE.Vector3(-1,1,0),
             new THREE.Vector3(1,1,0),
@@ -94,7 +94,7 @@ class App {
     }
 */
 /*
-    _setModle() {
+    _setModel() {
 
         const material = new THREE.MeshBasicMaterial({
             color:      0xffff00,
@@ -158,7 +158,7 @@ class App {
     }
 */
 /*
-    _setModle() {
+    _setModel() {
         const textureLoader = new THREE.TextureLoader();
         const map = textureLoader.load(
             "../core/textures/uv_grid_opengl.jpg",
@@ -203,7 +203,7 @@ class App {
         
     }
 */
-_setModle() {
+_setModel() {
     const textureLoader = new THREE.TextureLoader();
     const map = textureLoader.load("../core/img/glass/Glass_Window_002_basecolor.jpg");
     const mapAO = textureLoader.load("../core/img/glass/Glass_Window_002_ambientOcclusion.jpg");

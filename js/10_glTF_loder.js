@@ -17,7 +17,7 @@ class App {
 
         this._setCamera();
         this._setLight();
-        this._setModle();
+        this._setModel();
         this._setControls();
 
         window.onresize = this.resize.bind(this);
@@ -77,7 +77,7 @@ class App {
         this._camera.add(light);
     }
 
-    _setModle() {
+    _setModel() {
         const gltfLoader = new GLTFLoader();
         const url = "../data/GLTF/adamHead.gltf";
         gltfLoader.load(

@@ -53,7 +53,7 @@ class App {
 
         this._setCamera();
         this._setLight();
-        this._setModle();
+        this._setModel();
         this._setControls();
         this._setPicking();
 
@@ -101,7 +101,7 @@ class App {
         this._raycaster.cursorNormalizedPosition = {x,y};
     }
 
-    _setModle() {
+    _setModel() {
         const geometry = new THREE.BoxGeometry();
         for (let index_x = -20; index_x <= 20; index_x+=1.1) {
             for (let index_y = -20; index_y <= 20; index_y+=1.1) {

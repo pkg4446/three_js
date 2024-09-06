@@ -19,7 +19,7 @@ class App {
 
         this._setCamera();
         this._setLight();
-        this._setModle();
+        this._setModel();
         this._setControls();
 
         window.onresize = this.resize.bind(this);
@@ -51,7 +51,7 @@ class App {
         this._scene.add(light);
     }
 /*
-    _setModle() {
+    _setModel() {
         //const geometry = new THREE.BoxGeometry(1,1,1,2,2,2);
         //const geometry = new THREE.CircleGeometry(1, 16, Math.PI/2, Math.PI);
         //const geometry = new THREE.ConeGeometry(0.5, 1, 16, 2, true, Math.PI/2, Math.PI);
@@ -77,7 +77,7 @@ class App {
     }
 */
 /*
-    _setModle() {
+    _setModel() {
         const shape = new THREE.Shape();
         
         shape.moveTo( 1,  1);
@@ -106,7 +106,7 @@ class App {
     }
 */
 /*
-    _setModle() {
+    _setModel() {
         const shape = new THREE.Shape();
         
         const x=-2.5, y=-5;
@@ -135,7 +135,7 @@ class App {
     }
 */
 /*
-    _setModle() {
+    _setModel() {
         class CustomSinCurve extends THREE.Curve {
             constructor(scale) {
                 super();
@@ -161,7 +161,7 @@ class App {
     }
 */
 /*
-    _setModle() {
+    _setModel() {
         class CustomSinCurve extends THREE.Curve {
             constructor(scale) {
                 super();
@@ -193,7 +193,7 @@ class App {
     }
 */
 /*
-    _setModle() {
+    _setModel() {
         const points = [];
         for(let index=0; index<10; ++index){
             points.push(new THREE.Vector2(Math.sin(index*0.2)*3+3, (index-5)*0.8));
@@ -215,7 +215,7 @@ class App {
     }
 */
 /*
-    _setModle() {
+    _setModel() {
         const shape = new THREE.Shape();
         
         const x=-2.5, y=-5;
@@ -252,7 +252,7 @@ class App {
         this._model = group;
     }
 */
-    _setModle() {
+    _setModel() {
         const frontLoader = new FontLoader();
         async function loadFont(that) {
             const url  = "../core/fonts/helvetiker_regular.typeface.json"

@@ -16,7 +16,7 @@ class App {
 
         this._setCamera();
         this._setLight();
-        this._setModle();
+        this._setModel();
         this._setControls();
 
         window.onresize = this.resize.bind(this);
@@ -46,7 +46,7 @@ class App {
         this._scene.add(light);
     }
 
-    _setModle() {
+    _setModel() {
         const solarSystem = new THREE.Object3D();
         this._scene.add(solarSystem);
 

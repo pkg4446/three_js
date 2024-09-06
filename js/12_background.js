@@ -17,7 +17,7 @@ class App {
         this._setCamera();
         this._setLight();
         this._setBackground();
-        //this._setModle();
+        //this._setModel();
         this._setControls();
 
         window.onresize = this.resize.bind(this);
@@ -57,7 +57,7 @@ class App {
         const loader = new THREE.TextureLoader();
         loader.load("../data/img/earth.jpg", texture => {
             this._scene.background = texture;
-            this._setModle();
+            this._setModel();
         });
         */
         /*
@@ -71,7 +71,7 @@ class App {
             "../data/img/cube/negz.jpg",
         ], cubeTexture => {
             this._scene.background = cubeTexture;
-            this._setModle();
+            this._setModel();
         });
         */
         const loader = new THREE.TextureLoader();
@@ -79,11 +79,11 @@ class App {
             const renderTarget = new THREE.WebGLCubeRenderTarget(texture.image.height);
             renderTarget.fromEquirectangularTexture(this._renderer, texture);
             this._scene.background = renderTarget.texture;
-            this._setModle();
+            this._setModel();
         });
     }
 
-    _setModle() {
+    _setModel() {
         const pmremG    = new THREE.PMREMGenerator(this._renderer);
         const renderTarget = pmremG.fromEquirectangular(this._scene.background);
         //const renderTarget = pmremG.fromCubemap(this._scene.background);

@@ -19,7 +19,7 @@ class App {
 
         this._setCamera();
         this._setLight();
-        this._setModle();
+        this._setModel();
         this._setControls();
 
         window.onresize = this.resize.bind(this);
@@ -81,7 +81,7 @@ class App {
         light.castShadow = true;
     }
 
-    _setModle() {
+    _setModel() {
         const groundGeometry = new THREE.PlaneGeometry(10, 10);
         const groundMaterial = new THREE.MeshStandardMaterial({
             color: "#2c3e50",
