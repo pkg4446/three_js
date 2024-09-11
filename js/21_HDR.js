@@ -1,5 +1,6 @@
 import * as THREE from "../core/build/three.module.js"
 import { OrbitControls } from "../core/jsm/controls/OrbitControls.js";
+import { RGBELoader } from "../core/jsm/loaders/RGBELoader.js"
 
 class App {
     constructor() {
@@ -11,6 +12,9 @@ class App {
         divContainer.appendChild(renderer.domElement);
         this._renderer = renderer;
 
+        renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        renderer.toneMappingExposure = 1;
+
         const scene = new THREE.Scene();
         this._scene = scene;
 
@@ -18,11 +22,22 @@ class App {
         this._setLight();
         this._setModel();
         this._setControls();
+        this._setupBackground();
 
         window.onresize = this.resize.bind(this);
         this.resize();
 
         requestAnimationFrame(this.render.bind(this));
+    }
+
+    _setupBackground() {
+        new RGBELoader()
+            .load("../data/hdr/satara_night_4k.hdr", (texture) => {
+                texture.mapping = THREE.EquirectangularReflectionMapping;
+                this._scene.background = texture;         
+                this._scene.environment = texture;
+            }
+        );
     }
 
     _setCamera() {
@@ -34,26 +49,19 @@ class App {
             0.1,
             100
         );
-        camera.position.z = 2;
+        camera.position.z = 3;
         this._camera = camera;
     }
 
-    _setLight() {
-        const color = 0xffffff;
-        const intensity = 1;
-        const light = new THREE.DirectionalLight(color,intensity);
-        light.position.set(-1,2,4);
-        this._scene.add(light);
-    }
+    _setLight() {}
 
     _setModel() {
-        const geometry = new THREE.BoxGeometry(1,1,1);
-        const material = new THREE.MeshPhongMaterial({color:0x44aa88});
+        const geometry = new THREE.TorusKnotGeometry(1, 0.3, 256, 64, 2, 3);
 
-        const cube = new THREE.Mesh(geometry,material);
+        const material = new THREE.MeshStandardMaterial({color: 0xffffff});
 
+        const cube = new THREE.Mesh(geometry, material);
         this._scene.add(cube);
-        this._cube = cube;
     }
 ///////////////////////////////////////////////////////////
     _setControls() {
