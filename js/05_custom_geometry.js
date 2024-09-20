@@ -1,6 +1,6 @@
 import * as THREE from "../core/build/three.module.js"
 import { OrbitControls } from "../core/jsm/controls/OrbitControls.js";
-import {VertexNormalsHelper} from "../core/jsm/helpers/VertexNormalsHelper.js";
+import { VertexNormalsHelper } from "../core/jsm/helpers/VertexNormalsHelper.js";
 
 
 class App {
