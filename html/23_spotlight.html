@@ -3,6 +3,11 @@
     <head>
         <meta value="viewport" content="width=device-width,initial-scale=1">
         <link rel="stylesheet" href="../css/common.css">
+        <style>
+            #video {
+                display: none;
+            }
+        </style>
         <script type="importmap">
             {
                 "imports": {
@@ -15,5 +20,8 @@
     </head>
     <body>
         <div id="webgl-container"></div>
+        <video id="video" loop crossorigin="anonymous">
+            <source src = "../data/video/abstractdesign56.mp4" type="video/mp4;">
+        </video>
     </body>
 </html>
