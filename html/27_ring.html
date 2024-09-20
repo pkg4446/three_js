@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta value="viewport" content="width=device-width,initial-scale=1">
+        <link rel="stylesheet" href="../css/common.css">
+        <style>
+            .ui-panel {
+                position: absolute;
+                display: flex;
+                bottom: 1.5em;
+                left: 50%;
+                transform: translate(-50%, 0);
+                gap: 3em;
+            }
+
+            .ring-colors, .diamond-colors {
+                display: flex;
+                gap: 0.4em;
+                align-items: center;
+            }
+
+            .ring-colors div {
+                width: 6em;
+                height: 6em;
+                border-radius: 50%;
+                cursor: pointer;
+                border: 0.4em solid rgba(0,0,0,0.5);
+            }
+
+            .diamond-colors div {
+                width: 5.5em;
+                height: 5.5em;
+                border-radius: 30%;
+                cursor: pointer;
+                border: 0.4em solid rgba(0,0,0,0.5);
+            }
+        </style>
+        <script type="importmap">
+            {
+                "imports": {
+                    "three": "../core/build/three.module.js"
+                }
+            }
+        </script>
+        <script type="module" src="../js/27_ring.js" defer></script>
+        <title>3D Model with Three.js</title>
+    </head>
+    <body>
+        <div id="webgl-container"></div>
+        <div class="ui-panel">
+            <div class="ring-colors"></div>
+            <div class="diamond-colors"></div>
+        </div>
+    </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</html>
