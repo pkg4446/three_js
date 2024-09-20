@@ -5,6 +5,7 @@ import { GLTFLoader } from "../core/jsm/loaders/GLTFLoader.js"
 class App {
     constructor() {
         this._setupAmmo();
+        this._game = true;
         
     }
 
@@ -177,10 +178,10 @@ class App {
         mesh.position.set(pos.x, pos.y, pos.z);
         this._scene.add(mesh);
 
-        gsap.fromTo(mesh.position, { x: 0.6 },
+        gsap.fromTo(mesh.position, { x: 0.3 },
             {
-                x: -0.6,
-                duration: 1.5,
+                x: -0.3,
+                duration: 2,
                 yoyo: true,
                 repeat: -1,
                 ease: "power2.inOut"
@@ -260,17 +261,15 @@ class App {
         this._mouseY = 0;
         this._prevMouseY = 0;
 
-        window.addEventListener("mousemove", (event) => {
-            this._prevMouseY = this._mouseY;
-            this._mouseY = event.clientY;
-        });
-
         window.addEventListener("mouseup", () => {
-            const power = this._prevMouseY - this._mouseY;
-            if(power < 1) return;
-            const pos = { x: this._ball.position.x, y: this._ball.position.y, z: this._ball.position.z };
-            this._scene.remove(this._ball);
-            this._createBall(pos, power/30);
+            if(this._game){
+                const power = 1+Math.random();
+                console.log("power",power);
+                const pos = { x: this._ball.position.x, y: this._ball.position.y, z: this._ball.position.z };
+                this._scene.remove(this._ball);
+                this._createBall(pos, power);
+                this._game = false;
+            }
         });
 
         document.querySelector("#try-again").addEventListener("click", () => {
@@ -295,6 +294,7 @@ class App {
 
             this._scene.add(this._ball);
             this._showTryAgainButton(false);
+            this._game = true;
         });
 
         this._clock = new THREE.Clock();
