@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta value="viewport" content="width=device-width,initial-scale=1">
+        <link rel="stylesheet" href="../css/common.css">
+        <style>
+            #try-again {
+                display: none;
+                position: absolute;
+                width: 280px;
+                height: 84px;
+                border-radius: 42px;
+                font-size: 2em;
+                bottom: 10%;
+                left: 50%;
+                color: #000;
+                background: #fff;
+                justify-content: center;
+                align-items: center;
+                transform: translate(-50%, -50%);
+                cursor: pointer;
+                transition: 0.4s all;
+                box-shadow: 0 0 20px rgba(255,255,255,0.5);
+            }
+
+            #try-again:hover {
+                background-color: #000;
+                color: #fff;
+            }
+
+            #try-again.show {
+                display: flex;
+            }
+        </style>
+        <script type="importmap">
+            {
+                "imports": {
+                    "three": "../core/build/three.module.js"
+                }
+            }
+        </script>
+        <script type="module" src="../js/26_bowling.js" defer></script>
+        <title>3D Model with Three.js</title>
+    </head>
+    <body>
+        <div id="webgl-container"></div>
+        <div id="try-again">Try Again!</div>
+    </body>
+    <script src = "../core/jsm/libs/ammo.wasm.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</html>
