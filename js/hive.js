@@ -117,7 +117,7 @@ class App {
 
     _setModel_box() {
         const material_glass = new THREE.MeshPhysicalMaterial({
-            color: 0xffffff,
+            color: 0xE8DCD2,
             metalness: 0.1,
             roughness: 0.1,
             ior: 1,
