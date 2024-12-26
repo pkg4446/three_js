@@ -3,25 +3,36 @@ import { OrbitControls } from "../core/jsm/controls/OrbitControls.js";
 
 class App {
     constructor() {
-        const divContainer = document.querySelector("#webgl-container");
-        this._divContainer = divContainer;
-        
-        const renderer = new THREE.WebGLRenderer({antialias:true});
-        renderer.setPixelRatio(window.devicePixelRatio);
-        divContainer.appendChild(renderer.domElement);
-        this._renderer = renderer;
 
-        const scene = new THREE.Scene();
-        this._scene = scene;
-
+        this._setupThreeJs();
         this._setCamera();
         this._setLight();
         this._setModel();
         this._setControls();
+        this._setupEvents();  
+    }
 
+    _setupThreeJs() {
+        const divContainer = document.querySelector("#webgl-container");
+        this._divContainer = divContainer;
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setPixelRatio(window.devicePixelRatio);
+        divContainer.appendChild(renderer.domElement);
+        this._renderer = renderer;
+
+        renderer.outputEncoding = THREE.sRGBEncoding;
+        renderer.toneMappingExposure = 2.5;
+
+        const scene = new THREE.Scene();
+        this._scene = scene;
+    }
+
+    _setupEvents() {
         window.onresize = this.resize.bind(this);
         this.resize();
 
+        this._clock = new THREE.Clock();
         requestAnimationFrame(this.render.bind(this));
     }
 
